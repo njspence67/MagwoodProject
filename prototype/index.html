@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f5ef">
+  <title>Herd management demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#" aria-label="Herd management home">
+        <span class="brand-mark" aria-hidden="true">H</span>
+        <span><strong>Herd</strong><small>FIELD RECORDS</small></span>
+      </a>
+      <div class="farm-switcher">
+        <span class="farm-icon" aria-hidden="true">⌂</span>
+        <span><strong>Magwood Farm</strong><small>Coffee County, AL</small></span>
+        <span class="chevron" aria-hidden="true">⌄</span>
+      </div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="nav-list">
+        <button class="nav-item active" data-view="overview"><span class="nav-icon">◫</span>Overview</button>
+        <button class="nav-item" data-view="herd"><span class="nav-icon">♧</span>Herd <span class="nav-count">58</span></button>
+        <button class="nav-item" data-view="calendar"><span class="nav-icon">▦</span>Calendar</button>
+        <button class="nav-item" data-view="grazing"><span class="nav-icon">⌁</span>Grazing</button>
+        <button class="nav-item" data-view="operations"><span class="nav-icon">▤</span>Operations</button>
+      </nav>
+      <div class="sidebar-spacer"></div>
+      <div class="help-card">
+        <span class="help-mark">?</span>
+        <div><strong>Need a hand?</strong><p>Quick guides for the field</p></div>
+        <button type="button" aria-label="Open help">›</button>
+      </div>
+      <div class="profile-mini">
+        <span class="avatar">CM</span>
+        <span><strong>Field user</strong><small>Demo profile</small></span>
+        <button aria-label="Profile menu">•••</button>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark">H</span><strong>Herd</strong></div>
+        <div class="breadcrumb"><span>Magwood Farm</span><b>/</b><span id="crumb">Overview</span></div>
+        <div class="top-actions">
+          <span class="sample-badge"><span class="dot"></span> SAMPLE DATA</span>
+          <button class="icon-button" aria-label="Notifications">♧<i></i></button>
+          <span class="avatar avatar-small">CM</span>
+        </div>
+      </header>
+
+      <div class="demo-banner">
+        <span class="banner-icon">i</span>
+        <span><strong>Prototype with sample records.</strong> Counts, dates, animal statuses, and rotation timing are not verified client data.</span>
+        <button type="button" class="banner-close" aria-label="Dismiss notice">×</button>
+      </div>
+
+      <section class="page-wrap">
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow" id="pageEyebrow">MONDAY, NOVEMBER 16</p>
+            <h1 id="pageTitle">Good morning</h1>
+            <p class="page-subtitle" id="pageSubtitle">A clear view of the herd, today’s records, and what needs a look.</p>
+          </div>
+          <button class="primary-button" data-action="open-event" data-type="Note"><span>＋</span> Quick record</button>
+        </div>
+        <div id="page"></div>
+      </section>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <button class="mobile-nav-item active" data-view="overview"><span>◫</span>Home</button>
+    <button class="mobile-nav-item" data-view="herd"><span>♧</span>Herd</button>
+    <button class="mobile-nav-add" data-action="open-event" data-type="Note" aria-label="Add a quick record">＋</button>
+    <button class="mobile-nav-item" data-view="calendar"><span>▦</span>Calendar</button>
+    <button class="mobile-nav-item" data-view="grazing"><span>⌁</span>Grazing</button>
+  </nav>
+
+  <dialog id="eventDialog" class="dialog">
+    <form id="eventForm">
+      <div class="dialog-head">
+        <div><p class="eyebrow">QUICK RECORD</p><h2 id="dialogTitle">Add an event</h2></div>
+        <button class="close-button" type="button" data-action="close-dialog" aria-label="Close">×</button>
+      </div>
+      <label>Record type
+        <select name="type" id="eventType">
+          <option>Birth</option><option>Weight</option><option>Treatment</option><option>Tag change</option><option>Paddock move</option><option>Note</option>
+        </select>
+      </label>
+      <label>Animal or group
+        <select name="animal" id="eventAnimal"></select>
+      </label>
+      <div class="form-row">
+        <label>Date
+          <input type="date" name="date" id="eventDate" required>
+        </label>
+        <label class="checkbox-label"><input type="checkbox" name="approximate"> Approximate</label>
+      </div>
+      <label>What happened?
+        <textarea name="notes" rows="3" placeholder="Short note. You can add more detail later."></textarea>
+      </label>
+      <p class="form-hint">This demo keeps the record in this browser session only.</p>
+      <div class="dialog-actions">
+        <button class="secondary-button" type="button" data-action="close-dialog">Cancel</button>
+        <button class="primary-button" type="submit">Save record</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="animalDialog" class="dialog animal-dialog"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
