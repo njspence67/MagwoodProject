@@ -2,7 +2,7 @@
 
 ## Current target
 
-The repository now contains a phone-first frontend prototype and an initial Python/FastAPI backend. The backend developer owns the API and business logic; a different teammate owns the database, with adapter/query ownership still to be agreed. The database engine and IONOS plan are not yet confirmed. Deadlines are not a constraint for the current backend work.
+The repository now contains a phone-first frontend prototype and a PHP/Laravel 13 backend, rewritten from the initial Python/FastAPI implementation. The backend developer owns the API and business logic; a different teammate owns the database, with adapter/query ownership still to be agreed. IONOS shared hosting is the selected hosting direction; the exact package capabilities and database engine still need confirmation. Deadlines are not a constraint for the current backend work.
 
 See `backend/README.md` for the implemented API, local setup, limitations, and database integration contract. The remaining recommendations below preserve the earlier project context and are subject to team/client confirmation.
 
@@ -39,7 +39,7 @@ This table is the earlier suggested split, not current ownership. The current ba
 
 ### 1. IONOS plan and runtime
 
-Python with FastAPI is the selected backend development stack. A teacher will provide the IONOS plan, likely a Cloud Server; the exact product and management arrangement remain unknown. Local development uses a replaceable in-memory repository so it can proceed before database selection. Confirm Python application hosting and responsibility for server/application maintenance before deployment. The frontend remains plain HTML/CSS/JavaScript; no frontend framework change is required. Earlier Node/PHP suggestions are superseded by this development decision.
+PHP with Laravel 13 is the selected backend stack following confirmation that the IONOS plan is shared hosting. The Laravel rewrite supersedes the earlier FastAPI/Cloud Server assumption. Confirm PHP 8.3+ with Laravel's required extensions, Composer/deployment access, the ability to serve only the `public` directory, and the available MySQL/MariaDB service on the exact package. Local development uses a replaceable file-backed demo repository so work can proceed before database selection; the default adapter refuses production mode. Production authentication, database integration, and hosting verification remain required. The frontend remains plain HTML/CSS/JavaScript; no frontend framework change is required.
 
 ### 2. App name and earlier tab proposal
 
@@ -88,7 +88,7 @@ Local weather and butcher-price feeds are useful research items, but defer integ
 - Supply approved vaccine/deworm schedules and withdrawal periods.
 - Name the paddocks, confirm target rotation ranges, and identify separate groups.
 - Confirm feed bucket weight, recipe quantities, and ingredient costs.
-- Confirm the IONOS plan, user devices, roles, preferred notifications, and any existing eight-tab proposal.
+- Confirm the exact IONOS shared-hosting package capabilities, user devices, roles, preferred notifications, and any existing eight-tab proposal.
 
 ## Team working agreement
 
@@ -115,6 +115,6 @@ Keep the demo data visibly labeled. The goal is to show the intended workflow, n
 
 The prototype in the prototype folder is plain HTML, CSS, and JavaScript. It uses illustrative records and performs no network requests. Open prototype/index.html in a browser, or serve the prototype folder with:
 
-    python3 -m http.server 4173 --directory prototype
+    php -S 127.0.0.1:4173 -t prototype
 
 The prototype is for workflow review, not a production app. Do not treat its sample counts, dates, paddock timing, or animal statuses as client-confirmed data.

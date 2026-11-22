@@ -10,3 +10,11 @@ __pycache__/
 !.env.example
 build/
 dist/
+.tools/
+/backend/vendor/
+/backend/.phpunit.cache/
+/backend/.phpunit.result.cache
+/backend/bootstrap/cache/*.php
+/backend/storage/**
+!/backend/storage/**/
+!/backend/storage/**/.gitignore

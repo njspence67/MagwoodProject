@@ -1,0 +1,1505 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Magwood Herd Records API",
+    "description": "Laravel API with illustrative sample data. Authentication and database integration remain required before production use.",
+    "version": "0.2.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "System"
+        ],
+        "summary": "Health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Health Health Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/animals": {
+      "get": {
+        "tags": [
+          "Animals"
+        ],
+        "summary": "Animals",
+        "operationId": "animals_api_v1_animals_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200,
+              "default": "",
+              "title": "Q"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimalPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Animals"
+        ],
+        "summary": "Add Animal",
+        "operationId": "add_animal_api_v1_animals_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnimalCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Animal"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/api/v1/animals/{animal_id}": {
+      "get": {
+        "tags": [
+          "Animals"
+        ],
+        "summary": "Animal",
+        "operationId": "animal_api_v1_animals__animal_id__get",
+        "parameters": [
+          {
+            "name": "animal_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Animal Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Animal"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/api/v1/events": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Events",
+        "operationId": "events_api_v1_events_get",
+        "parameters": [
+          {
+            "name": "animal_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Animal Id"
+            }
+          },
+          {
+            "name": "group_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Group Id"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 100,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0,
+              "title": "Offset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventPage"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Add Event",
+        "operationId": "add_event_api_v1_events_post",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/NoteEvent"
+                  },
+                  {
+                    "$ref": "#/components/schemas/WeightEvent"
+                  },
+                  {
+                    "$ref": "#/components/schemas/BirthEvent"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TreatmentEvent"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TagChangeEvent"
+                  },
+                  {
+                    "$ref": "#/components/schemas/MoveEvent"
+                  }
+                ],
+                "discriminator": {
+                  "propertyName": "type",
+                  "mapping": {
+                    "note": "#/components/schemas/NoteEvent",
+                    "weight": "#/components/schemas/WeightEvent",
+                    "birth": "#/components/schemas/BirthEvent",
+                    "treatment": "#/components/schemas/TreatmentEvent",
+                    "tag_change": "#/components/schemas/TagChangeEvent",
+                    "paddock_move": "#/components/schemas/MoveEvent"
+                  }
+                },
+                "title": "Data"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/api/v1/events/{event_id}": {
+      "get": {
+        "tags": [
+          "Events"
+        ],
+        "summary": "Event",
+        "operationId": "event_api_v1_events__event_id__get",
+        "parameters": [
+          {
+            "name": "event_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Event Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Not Found"
+          },
+          "409": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Conflict"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            },
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/api/v1/groups": {
+      "get": {
+        "tags": [
+          "Grazing"
+        ],
+        "summary": "Groups",
+        "operationId": "groups_api_v1_groups_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Group"
+                  },
+                  "type": "array",
+                  "title": "Response Groups Api V1 Groups Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/paddocks": {
+      "get": {
+        "tags": [
+          "Grazing"
+        ],
+        "summary": "Paddocks",
+        "operationId": "paddocks_api_v1_paddocks_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/Paddock"
+                  },
+                  "type": "array",
+                  "title": "Response Paddocks Api V1 Paddocks Get"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Animal": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "cow",
+              "bull",
+              "heifer",
+              "steer",
+              "calf"
+            ],
+            "title": "Kind"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "sold",
+              "deceased",
+              "unknown"
+            ],
+            "title": "Status"
+          },
+          "group_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Id"
+          },
+          "tags": {
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "review_status": {
+            "type": "string",
+            "const": "unverified",
+            "title": "Review Status",
+            "default": "unverified"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "description",
+          "status"
+        ],
+        "title": "Animal"
+      },
+      "AnimalCreate": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "cow",
+              "bull",
+              "heifer",
+              "steer",
+              "calf"
+            ],
+            "title": "Kind"
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Description"
+          },
+          "current_tag": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 120,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Current Tag"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "sold",
+              "deceased",
+              "unknown"
+            ],
+            "title": "Status",
+            "default": "unknown"
+          },
+          "group_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Group Id"
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "kind",
+          "description"
+        ],
+        "title": "AnimalCreate"
+      },
+      "AnimalPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Animal"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "AnimalPage"
+      },
+      "BirthEvent": {
+        "properties": {
+          "occurred_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Occurred On"
+          },
+          "approximate": {
+            "type": "boolean",
+            "title": "Approximate",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "animal_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Animal Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "birth",
+            "title": "Type"
+          },
+          "calf_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Calf Id"
+          },
+          "calf_description": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Calf Description"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "occurred_on",
+          "animal_id",
+          "type",
+          "calf_description"
+        ],
+        "title": "BirthEvent",
+        "description": "An observation on the mother's record, not automatic calf registration."
+      },
+      "ErrorDetail": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "message": {
+            "type": "string",
+            "title": "Message"
+          },
+          "fields": {
+            "items": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Fields"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ErrorDetail"
+      },
+      "ErrorResponse": {
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ErrorDetail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "title": "ErrorResponse"
+      },
+      "Event": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "recorded_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Recorded At"
+          },
+          "record": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/NoteEvent"
+              },
+              {
+                "$ref": "#/components/schemas/WeightEvent"
+              },
+              {
+                "$ref": "#/components/schemas/BirthEvent"
+              },
+              {
+                "$ref": "#/components/schemas/TreatmentEvent"
+              },
+              {
+                "$ref": "#/components/schemas/TagChangeEvent"
+              },
+              {
+                "$ref": "#/components/schemas/MoveEvent"
+              }
+            ],
+            "title": "Record",
+            "discriminator": {
+              "propertyName": "type",
+              "mapping": {
+                "birth": "#/components/schemas/BirthEvent",
+                "note": "#/components/schemas/NoteEvent",
+                "paddock_move": "#/components/schemas/MoveEvent",
+                "tag_change": "#/components/schemas/TagChangeEvent",
+                "treatment": "#/components/schemas/TreatmentEvent",
+                "weight": "#/components/schemas/WeightEvent"
+              }
+            }
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "recorded_at",
+          "record"
+        ],
+        "title": "Event"
+      },
+      "EventPage": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/Event"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "type": "integer",
+            "title": "Total"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "EventPage"
+      },
+      "Group": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Name"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "Group"
+      },
+      "MoveEvent": {
+        "properties": {
+          "occurred_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Occurred On"
+          },
+          "approximate": {
+            "type": "boolean",
+            "title": "Approximate",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "type": {
+            "type": "string",
+            "const": "paddock_move",
+            "title": "Type"
+          },
+          "group_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Group Id"
+          },
+          "from_paddock_id": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 100,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "From Paddock Id"
+          },
+          "to_paddock_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "To Paddock Id"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "occurred_on",
+          "type",
+          "group_id",
+          "to_paddock_id"
+        ],
+        "title": "MoveEvent"
+      },
+      "NoteEvent": {
+        "properties": {
+          "occurred_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Occurred On"
+          },
+          "approximate": {
+            "type": "boolean",
+            "title": "Approximate",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Notes"
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "animal_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Animal Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "note",
+            "title": "Type"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "occurred_on",
+          "notes",
+          "animal_id",
+          "type"
+        ],
+        "title": "NoteEvent"
+      },
+      "Paddock": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Name"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "id",
+          "name"
+        ],
+        "title": "Paddock"
+      },
+      "Source": {
+        "properties": {
+          "document": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Document"
+          },
+          "sheet": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 120,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sheet"
+          },
+          "row": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "exclusiveMinimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Row"
+          },
+          "original_text": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Original Text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "document",
+          "original_text"
+        ],
+        "title": "Source",
+        "description": "Optional provenance for a manually transcribed observation."
+      },
+      "Tag": {
+        "properties": {
+          "label": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Label"
+          },
+          "valid_from": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid From"
+          },
+          "valid_to": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valid To"
+          },
+          "current": {
+            "type": "boolean",
+            "title": "Current",
+            "default": true
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "label"
+        ],
+        "title": "Tag"
+      },
+      "TagChangeEvent": {
+        "properties": {
+          "occurred_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Occurred On"
+          },
+          "approximate": {
+            "type": "boolean",
+            "title": "Approximate",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "animal_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Animal Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "tag_change",
+            "title": "Type"
+          },
+          "new_tag": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "New Tag"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "occurred_on",
+          "animal_id",
+          "type",
+          "new_tag"
+        ],
+        "title": "TagChangeEvent"
+      },
+      "TreatmentEvent": {
+        "properties": {
+          "occurred_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Occurred On"
+          },
+          "approximate": {
+            "type": "boolean",
+            "title": "Approximate",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "animal_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Animal Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "treatment",
+            "title": "Type"
+          },
+          "product": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Product"
+          },
+          "dose_as_entered": {
+            "type": "string",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Dose As Entered"
+          },
+          "administered_by": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 120,
+                "minLength": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Administered By"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "occurred_on",
+          "animal_id",
+          "type",
+          "product",
+          "dose_as_entered"
+        ],
+        "title": "TreatmentEvent",
+        "description": "Record an actual treatment; no dosage or schedule recommendations."
+      },
+      "WeightEvent": {
+        "properties": {
+          "occurred_on": {
+            "type": "string",
+            "format": "date",
+            "title": "Occurred On"
+          },
+          "approximate": {
+            "type": "boolean",
+            "title": "Approximate",
+            "default": false
+          },
+          "notes": {
+            "type": "string",
+            "maxLength": 4000,
+            "title": "Notes",
+            "default": ""
+          },
+          "source": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Source"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "animal_id": {
+            "type": "string",
+            "maxLength": 100,
+            "minLength": 1,
+            "title": "Animal Id"
+          },
+          "type": {
+            "type": "string",
+            "const": "weight",
+            "title": "Type"
+          },
+          "value": {
+            "type": "number",
+            "exclusiveMinimum": 0.0,
+            "title": "Value"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "lb",
+              "kg"
+            ],
+            "title": "Unit"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "occurred_on",
+          "animal_id",
+          "type",
+          "value",
+          "unit"
+        ],
+        "title": "WeightEvent"
+      }
+    }
+  }
+}

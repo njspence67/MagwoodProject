@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "start": "python -m http.server 4173 --directory prototype",
+    "start": "php -S 127.0.0.1:4173 -t prototype",
     "test": "node --test"
   }
 }
