@@ -2,7 +2,9 @@
 
 ## Current target
 
-The GitHub repository is connected and currently contains only its starter README. Trello shows Sprint 1 focused on selecting services and dividing research, with a demo or prototype expected by the end of Sprint 2. The fastest useful result is therefore a reviewable phone-first prototype with one complete herd-record workflow, followed by a technical decision based on the actual IONOS plan.
+The repository now contains a phone-first frontend prototype and an initial Python/FastAPI backend. The backend developer owns the API and business logic; a different teammate owns the database, with adapter/query ownership still to be agreed. The database engine and IONOS plan are not yet confirmed. Deadlines are not a constraint for the current backend work.
+
+See `backend/README.md` for the implemented API, local setup, limitations, and database integration contract. The remaining recommendations below preserve the earlier project context and are subject to team/client confirmation.
 
 This document is a working recommendation. It does not represent client approval of the unresolved rules below.
 
@@ -31,13 +33,13 @@ This document is a working recommendation. It does not represent client approval
 | Mason | Client-data staging and domain rule review; keep raw notes and identify ambiguous matches. | Import map and a short confirmation list for Carlos and Charleene. |
 | Nicholas | Operations flows, integration scenarios, and handoff planning. | Grazing/feedlot/booking acceptance scenarios and outline of the walkthrough. |
 
-The names are a suggested split based on the current team, not an assessment of individual skills. Reassign if someone has a stronger fit for another workstream.
+This table is the earlier suggested split, not current ownership. The current backend assignment excludes database development; the database teammate's exact responsibilities remain to be agreed.
 
 ## Recommended answers to open questions
 
 ### 1. IONOS plan and runtime
 
-Do not select a production stack until someone checks the exact IONOS plan. Keep the first UI prototype dependency-free. If the plan supports Node services, use the proposed TypeScript/React front end and Node API. If it only supports shared PHP hosting, use Laravel and Vue/Inertia. Keep MariaDB only if the selected hosting tier supports it reliably. Do not spend Sprint 2 scaffolding both paths.
+Python with FastAPI is the selected backend development stack. A teacher will provide the IONOS plan, likely a Cloud Server; the exact product and management arrangement remain unknown. Local development uses a replaceable in-memory repository so it can proceed before database selection. Confirm Python application hosting and responsibility for server/application maintenance before deployment. The frontend remains plain HTML/CSS/JavaScript; no frontend framework change is required. Earlier Node/PHP suggestions are superseded by this development decision.
 
 ### 2. App name and earlier tab proposal
 
